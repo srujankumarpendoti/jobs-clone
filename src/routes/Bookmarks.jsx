@@ -1,14 +1,27 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import JobCard from "../components/JobCard";
 import { BookmarksActions } from "../store/bookmarksSlice";
+import { useState } from "react";
 
 const Bookmarks = () => {
   const dispatch = useDispatch();
+  const [bookmarksList, setBookmarksList] = useState([]);
   useEffect(() => {
-    dispatch(BookmarksActions.loadBookmarksFromLocalStorage());
+    const loadBookmarks = async () => {
+      const storedBookmarks = await localStorage.getItem("bookmarks");
+      if (storedBookmarks) {
+        setBookmarksList(JSON.parse(storedBookmarks));
+        dispatch(
+          BookmarksActions.loadBookmarksFromLocalStorage(
+            JSON.parse(storedBookmarks)
+          )
+        );
+      }
+    };
+
+    loadBookmarks();
   }, []);
-  const bookmarksList = useSelector((store) => store.bookmarks);
   return (
     <>
       {bookmarksList.length === 0 ? (

@@ -6,7 +6,6 @@ import { TbMoneybag } from "react-icons/tb";
 import { FaLocationDot } from "react-icons/fa6";
 import { BookmarksActions } from "../store/bookmarksSlice";
 import ErrorMessage from "./ErrorMessage";
-import FetchJobsList from "./FetchJobsList";
 
 const JobDetails = () => {
   const { id } = useParams();

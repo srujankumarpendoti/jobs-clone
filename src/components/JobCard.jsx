@@ -2,8 +2,15 @@ import { Link } from "react-router-dom";
 import { TbMoneybag } from "react-icons/tb";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoCall } from "react-icons/io5";
+import { useDispatch } from "react-redux";
+import { JobDetailsActions } from "../store/jobDetailsSlice";
 
 const JobCard = ({ jobDetails }) => {
+  const dispatch = useDispatch();
+
+  const handleViewJobDetails = () => {
+    dispatch(JobDetailsActions.viewJobDetails(jobDetails));
+  };
   const { id, job_role, job_location_slug, primary_details, whatsapp_no } =
     jobDetails;
 
@@ -16,7 +23,11 @@ const JobCard = ({ jobDetails }) => {
       : `${primary_details.Salary} P.M.`;
 
   return (
-    <Link to={`/job/${id}`} className="jobcard-container ">
+    <Link
+      onClick={handleViewJobDetails}
+      to={`/job/${id}`}
+      className="jobcard-container "
+    >
       <h1>{job_role}</h1>
 
       <div className="">

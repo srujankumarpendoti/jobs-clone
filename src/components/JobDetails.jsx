@@ -44,6 +44,11 @@ const JobDetails = () => {
 
   const salary =
     primary_details.Salary === "-" ? "Not Disclosed" : primary_details.Salary;
+
+  const isBookmarked =
+    bookmarksList.filter((job) => Number(job.id) === Number(id)).length !== 0
+      ? "Bookmarked"
+      : "Bookmark";
   return (
     <>
       {jobDetails ? (
@@ -98,7 +103,7 @@ const JobDetails = () => {
                 onClick={handleAddBookmark}
                 className="btn btn-success rounded-pill fw-medium"
               >
-                Bookmark
+                {isBookmarked}
               </button>
             </div>
           </section>
